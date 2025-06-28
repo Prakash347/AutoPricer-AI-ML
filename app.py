@@ -2,11 +2,11 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import streamlit as st
 
 # Load model and scaler
-model = pickle.load(open('random_forest_model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
+model = joblib.load('random_forest_model.pkl')
+scaler = joblib.load('scaler.pkl')
 
 st.title("🚗 AutoPricer AI – Predict Used Car Prices")
 st.write("Enter vehicle details below to get an estimated market price.")
