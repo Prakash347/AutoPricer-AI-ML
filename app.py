@@ -1,15 +1,17 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
-import streamlit as st
+import joblib  # ✅ Not pickle
 
-# Load model and scaler
-model = joblib.load('random_forest_model.pkl')
-scaler = joblib.load('scaler.pkl')
+# ✅ Safe load with error handling
+try:
+    model = joblib.load("random_forest_model.pkl")
+    scaler = joblib.load("scaler.pkl")
+except FileNotFoundError:
+    st.error("Model files not found. Please check filenames or deployment folder.")
+    st.stop()
 
-st.title("🚗 AutoPricer AI – Predict Used Car Prices")
-st.write("Enter vehicle details below to get an estimated market price.")
+
 
 # User inputs
 year = st.slider("Manufacturing Year", 2000, 2025, 2020)
